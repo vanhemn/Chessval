@@ -39,5 +39,4 @@ http.listen(process.env.PORT, function(){
 
 io.on('connection', (socket) => {
   socket.on('chat', (data) => { io.emit('chat', data) });
-  socket.on('disconnect', () => { io.emit('disconnect')});
 });
