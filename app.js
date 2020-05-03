@@ -3,6 +3,7 @@ const express = require("express");
 require('dotenv').config();
 const app  = express();
 const http = require('http').Server(app);
+const io = require('socket.io')(http);
 const fs = require('fs');
 const bodyParser = require('body-parser')
 const path = require('path');
@@ -22,7 +23,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 /*------include fichier------*/
 app.get('/', function(req, res) {
-		res.sendFile("public/view/index.html")
+		res.sendFile(__dirname + "/public/view/index.html")
 	});
 
 /*======================route fichier static (public)====================*/
@@ -34,4 +35,9 @@ app.use("/js", express.static(__dirname + '/public/js'));
 /*==================start serv==================*/
 http.listen(process.env.PORT, function(){
 	console.log('listening on *:' + process.env.PORT);
+});
+
+io.on('connection', (socket) => {
+  socket.on('chat', (data) => { io.emit('chat', data) });
+  socket.on('disconnect', () => { io.emit('disconnect')});
 });
