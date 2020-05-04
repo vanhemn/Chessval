@@ -9,6 +9,10 @@ $('#text').keypress(function (e) {
 
 socket.on('connect', () => {
 	  socket.on('chat', (data) => {
-	  	$('#chat').append('<li class="collection-item">'+data+'</li>')
+	  	if (socket.id == data.id)
+	  		$('#chat').append('<li class="collection-item">'+data.id.substring(0,4)+" : "+data.msg+'</li>')
+	  	else
+	  		$('#chat').append('<li class="collection-item grey-text text-darken-3">'+data.id.substring(0,4)+" : "+data.msg+'</li>')	
+	  	$('.chatbox').scrollTop($('.chatbox').height());
 	  })
 });

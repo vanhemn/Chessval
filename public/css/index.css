@@ -1,0 +1,63 @@
+body {
+	background-image: url(/img/bg/pattern.png);
+}
+
+.chatbox {
+	height: 50vh;
+	overflow-y: auto;
+}
+
+.logo {
+	margin-top: 10%;
+	filter: drop-shadow(0 0 1rem rgb(215, 212, 212));
+
+}
+
+.pictos {
+	width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    margin-right: 10px
+}
+
+.margin-t-l {
+	margin-top: 15%
+}
+
+.margin-t-m {
+	margin-top: 10%
+}
+
+.margin-t-s {
+	margin-top: 5%
+}
+
+.container-smal {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.col.s3.full {
+  min-height: 100vh; /* use "vh" instead of % */
+}
+
+/* label focus color */
+ .input-field input:focus + label {
+   color: #bdbdbd !important;
+ }
+ /* label underline focus color */
+ .row .input-field input:focus {
+   border-bottom: 1px solid #bdbdbd !important;
+   box-shadow: 0 1px 0 0 #bdbdbd !important
+ }
+
+/* valid color */
+   .input-field input[type=text].valid {
+     border-bottom: 1px solid #bdbdbd !important;
+     box-shadow: 0 1px 0 0 #bdbdbd !important;
+   }
+   /* invalid color */
+   .input-field input[type=text].invalid {
+     border-bottom: 1px solid #bdbdbd !important;
+     box-shadow: 0 1px 0 0 #bdbdbd !important;
+   }
