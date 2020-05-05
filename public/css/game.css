@@ -1,0 +1,22 @@
+
+.chatbox {
+	height: 50vh;
+	overflow-y: auto;
+}
+
+.logo {
+	margin-top: 10%;
+	filter: drop-shadow(0 0 1rem rgb(215, 212, 212));
+}
+
+.pictos {
+	width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    margin-right: 10px
+}
+
+
+.col.s3.full {
+  min-height: 100vh; /* use "vh" instead of % */
+}

@@ -6,67 +6,74 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!-- Compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-	<link rel="stylesheet" type="text/css" href="/css/index.css">
+	<link rel="stylesheet" type="text/css" href="/css/global.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-	<div class="row">
-		<!-- menu de gauche -->
-		<div class="col s3">
-			<div class="logo">
-				<center>
-					<img src="/img/logo/logo.png">
-				</center>
-			</div>
-			<div class="container-smal">
-				<div class="row margin-t-l">
-					<div class="col s12">
-						<div class="card-panel">
-							<h4 class="center-align"><b>Chevalier</b></h4>
-							<div class="margin-t-m">
-								<ul>
-									<li class="collection-item"><h5><img class="pictos" src="/img/pictos/hp.png"> Vie<div class="secondary-content">10/20</div></h5></li>
-
-									<li class="collection-item"><h5><img class="pictos" src="/img/pictos/range.png"> Portée<div class="secondary-content">1</div></h5></li>
-
-									<li class="collection-item"><h5><img class="pictos" src="/img/pictos/move.png"> Déplacement<div class="secondary-content">4</div></h5></li>
-
-									<li class="collection-item"><h5><img class="pictos" src="/img/pictos/damage.png"> Dégats<div class="secondary-content">20</div></h5></li>
-
+	<div class="row valign-wrapper" style="height: 100vh">
+		<div class="col s4"></div>
+		<div class="col s4">
+			<center>
+				<div class="row">
+					<div class="col m12">
+						<img class="logo" src="/img/logo/logo.png">
+						<div class="card margin-t-s">
+							<div class="card-tabs">
+								<ul class="tabs tabs-fixed-width">
+									<li class="tab"><a class="active" href="#create">Crée une partie</a></li>
+									<li class="tab"><a href="#join">Rejoindre une partie</a></li>
 								</ul>
+							</div>
+							<div class="card-content">
+								<div id="join">
+
+									<div class="row">
+										<div class="col s12">
+											<div class="row">
+												<div class="input-field col s6">
+													<input id="Pseudo" type="text" class="validate">
+													<label for="Pseudo">Pseudo</label>
+												</div>
+												<div class="input-field col s6">
+													<input id="Room" type="text" class="validate">
+													<label for="Room">Room ID</label>
+												</div>
+											</div>
+											<button id="Bjoin" class="btn waves-effect waves-light grey">Rejoindre la partie
+												<i class="material-icons right">send</i>
+											</button>
+										</div>
+									</div>
+
+								</div>
+								<div id="create">
+									
+									<div class="row">
+										<div class="col s12">
+											<div class="row">
+												<div class="input-field col s12">
+													<input id="Pseudoc" type="text" class="validate">
+													<label for="Pseudoc">Pseudo</label>
+												</div>
+											</div>
+											<button id="b_create" class="btn waves-effect waves-light grey">Crée la partie
+												<i class="material-icons right">send</i>
+											</button>
+										</div>
+									</div>
+
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</center>
 		</div>
-		<!-- jeu -->
-		<div class="col s6">11</div>
-		<!-- menu de droite -->
-		<div class="col s3 full valign-wrapper">
-			<div class="container-smal">
-				<div class="row">
-					<div class="col s12">
-						<div class="card-panel ">
-							<span class="blue-text text-darken-2">
-								<div class="chatbox">
-									<ul id="chat">
-									</ul>
-								</div>
-								<div class="input-field">
-									<input  id="text" type="text" class="validate">
-								</div>
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<div class="col s4"></div>
 	</div>
 </body>
 </html>
-<script src="/socket.io/socket.io.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>

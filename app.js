@@ -11,7 +11,6 @@ const minify = require('express-minify');
 /*======================================================*/
 
 
-
 // Middleware session
 app.use(minify({cache: __dirname + '/cache'}));
 app.use(bodyParser.json({limit: '10MB'}));       // to support JSON-encoded bodies
@@ -21,10 +20,13 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 /*======================routes==========================*/ 
 
-/*------include fichier------*/
+app.get('/game/:id', function(req, res) {
+	res.sendFile(__dirname + "/public/view/game.html")
+});
+
 app.get('/', function(req, res) {
-		res.sendFile(__dirname + "/public/view/index.html")
-	});
+	res.sendFile(__dirname + "/public/view/index.html")
+});
 
 /*======================route fichier static (public)====================*/
 app.use("/css", express.static(__dirname + '/public/css'));
@@ -38,5 +40,7 @@ http.listen(process.env.PORT, function(){
 });
 
 io.on('connection', (socket) => {
-  require('./src/chat.js')(socket, io);
+	socket.roomslist = [];
+	require('./src/gameManager.js')(socket, io);
+	require('./src/chat.js')(socket, io);
 });
