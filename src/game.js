@@ -35,7 +35,7 @@ module.exports = class Game {
 
 	/*create and place piece*/
 	createPiece(playerId, piece_name, position) {
-		if (this.matrix[position.y][position.x] == null) {
+		if (this.matrix[position.y][position.x] == null && this.players[playerId]) {
 			let piece = Object.assign({}, this.rules.units[piece_name]);
 			piece.playerId = playerId;
 			piece.position = position;
