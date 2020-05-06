@@ -1,5 +1,5 @@
 const params ={};location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(s,k,v){params[k]=v})
-const socket = io.connect('http://localhost:8080');
+const socket = io.connect('http://51.15.250.168:8080');
 let gameData;
 let color;
 
