@@ -51,7 +51,7 @@ const game = {
 
 function drawRange (tile, array) {
 	var finder = new PF.AStarFinder();
-	for (let a of array){
+	for (let a of array) {
 		var grid = new PF.Grid(gameData.matrix);
 		
 		var path = finder.findPath(tile.position.x, tile.position.y, a[0], a[1], grid);
