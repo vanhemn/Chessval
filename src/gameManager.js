@@ -25,14 +25,18 @@ module.exports = function(socket, io) {
 	});
 
 	socket.on("debug" , data => {
-			let piece =  io.sockets.adapter.rooms[socket.mainroom].game.createPiece(socket.id, "Chevalier", data)
+		let piece =  io.sockets.adapter.rooms[socket.mainroom].game.createPiece(socket.id, "Chevalier", data)
+		if (piece){
 			io.to(socket.mainroom).emit('appendPiece', {obj: piece, game: io.sockets.adapter.rooms[socket.mainroom].game});
+		}	
 	})
 
 	socket.on('move', (data) => {
 		let rep = io.sockets.adapter.rooms[socket.mainroom].game.movePiece(socket.id, data.to, data.object)
-		rep.game = io.sockets.adapter.rooms[socket.mainroom].game
-		io.to(socket.mainroom).emit('move', rep);
+		if (rep) {
+			rep.game = io.sockets.adapter.rooms[socket.mainroom].game
+			io.to(socket.mainroom).emit('move', rep);
+		}	
 	})
 
 }

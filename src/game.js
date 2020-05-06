@@ -34,11 +34,14 @@ module.exports = class Game {
 
 	/*create and place piece*/
 	createPiece(playerId, piece_name, position) {
-		let piece = Object.assign({}, this.rules.units[piece_name]);
-		piece.playerId = playerId;
-		piece.position = position;
-		this.matrix[position.y][position.x] = piece;
-		return piece;
+		if (this.matrix[position.y][position.x] == null) {
+			let piece = Object.assign({}, this.rules.units[piece_name]);
+			piece.playerId = playerId;
+			piece.position = position;
+			this.matrix[position.y][position.x] = piece;
+			return piece;
+		}
+		return null;	
 	}
 
 	/*move existing piece*/
@@ -47,19 +50,22 @@ module.exports = class Game {
 		if (piece && piece.playerId == playerId && this.checkMove(to, piece.position, piece.move)) {
 			let from = piece.position;
 			piece.position = to;
-			delete this.matrix[from.y][from.x];
+			this.matrix[from.y][from.x] = null;
 			this.matrix[to.y][to.x] = piece;
 			return {from: from, obj: piece};
 		}
+		return null;
 	}
 
 	checkMove (to, from, move) {
 		let finder = new PF.AStarFinder();
 		let grid = new PF.Grid(Object.assign(this.matrix));
-		let path = finder.findPath(to.y, to.x, from.y, from.x, grid);
-		if (path.length <= move + 1){
+		let path = finder.findPath(from.x, from.y, to.x, to.y, grid);
+		console.log(path)
+		if (path.length != 0 && path.length <= move + 1){
 			return true;
 		}
+		console.log("cant move")
 		return false;
 	}
 }

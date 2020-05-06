@@ -32,7 +32,6 @@ socket.on('connect', () => {
 });
 
 socket.on('start', (data) => {
-	console.log(data)
 	gameData = data
 })
 
@@ -49,6 +48,7 @@ socket.on('move', (data) => {
 	game.place(data.from, data.obj, data.game)
 })
 
+/*crée selon la taille coter serveur*/
 function resize_table_chess( id )
 {
 	$(id).width( 'auto' ).height( 'auto' );
