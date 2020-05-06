@@ -1,11 +1,3 @@
-var matrix = [];
-for(var i=0; i<10; i++) {
-	matrix[i] = [];
-	for(var j=0; j<10; j++) {
-		matrix[i][j] = null;
-	}
-}
-
 const game = {
 	
 	/*10 = terrain lenght*/
@@ -31,44 +23,46 @@ const game = {
 		return tiles;
 	},
 
-	place: (prev, next, obj) => {
+	place: (prev, obj, data) => {
+		gameData = data
 		if (prev) {
-			console.log($("#g_"+prev.x+"_"+prev.y).children()[0].children()[0].remove());
+			let div = $("#g_"+prev.x+"_"+prev.y).children()[0];
+			$(div).children().remove();
 		}
-		if (next) {
-			obj.x = next.x;
-			obj.y = next.y;
-			matrix[next.y][next.x] = obj;
-			let img = $(`<img width="100%" src="/img/units/`+obj.img+`_`+color+`.png"><span class='lifebar lifefull'>`+obj.life+`/`+obj.maxLife+`</span>`);
-			console.log(img)
-			img.click((e) => {
-				/*reset*/
-				$("td div").removeClass("movepreview");
-				$("#info").hide();
-				$("td div").removeClass("select");
-
+		let img = $(`<img width="100%" src="/img/units/`+obj.img+`_`+gameData.players[obj.playerId].color+`.png"><span class='lifebar lifefull'>`+obj.life+`/`+obj.maxLife+`</span>`);
+		img.click((e) => {
+			clean();
+			$("#info").hide();
+			console.log(obj.playerId, "==", socket.id)
+			if (obj.playerId == socket.id) {
 				fillInfo(obj);
 				$(e.target).parent().addClass("select");
 				$("#info").show();
 				var p = $(e.target).parent().parent();
 				title = p.attr('id').split('_');
-				drawRange(matrix[title[2]][title[1]], game.findRange({x: title[1], y:title[2]}, matrix[title[2]][title[1]].move), matrix[title[2]][title[1]].move);
-			})
+				drawRange(obj, game.findRange({x: title[1], y:title[2]}, obj.move), obj.move);
+			}
+		})
 
-			let div = $("#g_"+next.x+"_"+next.y).children()[0]
-			$(div).append(img)
-		}
+		let div = $("#g_"+obj.position.x+"_"+obj.position.y).children()[0]
+		$(div).append(img)
 	}
 }
 
 function drawRange (tile, array) {
 	var finder = new PF.AStarFinder();
 	for (let a of array){
-		var grid = new PF.Grid(matrix);
-		var path = finder.findPath(tile.x, tile.y, a[0], a[1], grid);
-		if (path.length <= tile.move + 1 && matrix[a[1]][a[0]] == null)
+		var grid = new PF.Grid(gameData.matrix);
+		
+		var path = finder.findPath(tile.position.x, tile.position.y, a[0], a[1], grid);
+		if (path.length <= tile.move + 1 && gameData.matrix[a[1]][a[0]] == null)
 			$("#g_"+a[0]+"_"+a[1]+" div").addClass("movepreview");
 	}
+	$(".movepreview").click((e)=>{
+		clean();
+		let adr = $(e.target).parent().attr('id').split('_');
+		socket.emit("move", {object: tile, to: {x:adr[1], y:adr[2]}});
+	})
 }
 
 function fillInfo(obj){
@@ -77,4 +71,11 @@ function fillInfo(obj){
 	$("#move").html(obj.move);
 	$("#damage").html(obj.damage);
 	$("#name").html(obj.name)
+}
+
+
+function clean() {
+	$(".movepreview").off("click");
+	$("td div").removeClass("movepreview");
+	$("td div").removeClass("select");
 }

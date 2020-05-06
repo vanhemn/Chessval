@@ -5,7 +5,8 @@ module.exports = function(socket, io) {
 		}
 		io.to(socket.mainroom).emit('chat', {id: socket.displayname, msg: data}) 
 	});
-	socket.on('displayname', (data) => { 
+	socket.on('displayname', (data) => {
+		if (!data.displayname) data.displayname = socket.id
 		socket.displayname = data.displayname; 
 	});
 }
