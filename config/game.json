@@ -1,0 +1,100 @@
+{
+	"units": {
+		"ROI": {
+			"name": "ROI",
+			"price": null,
+			"maxLife": 100,
+			"life": 100,
+			"range": 1,
+			"move": 1,
+			"damage": 10,
+			"text": "Lorsque le roi meurt, vous perdez la partie.",
+			"img": "roi"
+		},
+		"Épéiste": {
+			"name": "Épéiste",
+			"price": 100,
+			"maxLife": 15,
+			"life": 15,
+			"range": 1,
+			"move": 3,
+			"damage": 15,
+			"text": null,
+			"img": "ecuyer"
+		},
+		"Chevalier": {
+			"name": "Chevalier",
+			"price": 150,
+			"maxLife": 20,
+			"life": 20,
+			"range": 1,
+			"move": 4,
+			"damage": 20,
+			"text": null,
+			"img": "chevalier"
+		},
+		"Paladin": {
+			"name": "Paladin",
+			"price": 150,
+			"maxLife": 20,
+			"life": 20,
+			"range": 1,
+			"move": 2,
+			"damage": 15,
+			"text": "À la fin de votre tour, le paladin soigne lui et les unités alliées de 10 PV autour de lui dans un rayon de une case.",
+			"effect": {
+				"type": "heal",
+				"value": 10
+			},
+			"img": "paladin"
+		},
+		"Champion": {
+			"name": "Champion",
+			"price": 175,
+			"maxLife": 30,
+			"life": 30,
+			"range": 1,
+			"move": 2,
+			"damage": 25,
+			"text": null,
+			"img": "champion"
+		},
+		"Archer": {
+			"name": "Archer",
+			"price": 125,
+			"maxLife": 10,
+			"life": 10,
+			"range": 3,
+			"move": 2,
+			"damage": 10,
+			"text": null,
+			"img": "archer"
+		},
+		"Tour": {
+			"name": "Tour",
+			"price": 250,
+			"maxLife": 60,
+			"life": 60,
+			"range": 3,
+			"move": 0,
+			"damage": 15,
+			"text": null,
+			"img": "tour"
+		},
+		"Trébuchet": {
+			"name": "Trébuchet",
+			"price": 300,
+			"maxLife": 15,
+			"life": 15,
+			"range": 5,
+			"move": 1,
+			"damage": 50,
+			"text": "Attaquer avec passe votre prochain tour.",
+			"effect": {
+				"type": "end_turn",
+				"value": 2
+			},
+			"img": "trebuchet"
+		}
+	}
+}

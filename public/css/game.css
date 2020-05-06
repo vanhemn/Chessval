@@ -4,6 +4,42 @@
 	overflow-y: auto;
 }
 
+.movepreview {
+	background-color: rgba(41, 171, 226, 0.3);
+	border: 2px solid #29ABE2;
+}
+
+.select {
+	background-color: rgba(255, 255, 255, 0.08);
+	border: 2px solid #fff;
+}
+
+.damagepreview {
+	background-color: rgba(255, 148, 31, 0.3);
+	border: 2px solid #FF941F;
+}
+
+.lifebar {
+	border-radius: 135px 135px 135px 135px;
+	-moz-border-radius: 135px 135px 135px 135px;
+	-webkit-border-radius: 135px 135px 135px 135px;
+	border: 1px solid #000000;
+	position: relative;
+	top: -1.8em;
+	padding: 1px 8px;
+}
+
+
+.lifefull {
+	background-color: #4cd137;
+}
+
+.lifelow {
+	background-color: #e84118;
+}
+
+
+
 .logo {
 	margin-top: 10%;
 	filter: drop-shadow(0 0 1rem rgb(215, 212, 212));
@@ -11,34 +47,34 @@
 
 .pictos {
 	width: 40px;
-    height: 40px;
-    vertical-align: middle;
-    margin-right: 10px
+	height: 40px;
+	vertical-align: middle;
+	margin-right: 10px
 }
 
 
 .col.s3.full {
-  min-height: 100vh; /* use "vh" instead of % */
+	min-height: 100vh; /* use "vh" instead of % */
 }
 
 table.chess_table {
- width:100%; min-width:8em; max-width:64em; 
- margin:0 auto; padding:0;
-  border-collapse: collapse;
- 
+	width:100%; min-width:8em; max-width:64em; 
+	margin:0 auto; padding:0;
+	border-collapse: collapse;
+
 }
 
 table.chess_table td {
-  background-image: url("/img/bg/herbe.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  border: 1px solid grey;
+	background-image: url("/img/bg/terrain/herbe_20.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	border: 1px solid #bdc3c7;
 }
-table.chess_table tr {
-  border: 1px solid grey;
-}
+/*table.chess_table tr {
+	border: 1px solid grey;
+}*/
 
 table.chess_table tr td {
- margin:0; padding:0;
- font-size: 1em; font-family: serif; text-align: center;
+	margin:0; padding:0;
+	font-size: 1em; font-family: serif; text-align: center;
 }
