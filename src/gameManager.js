@@ -21,7 +21,6 @@ module.exports = function(socket, io) {
 			console.log("start game")
 			io.to(socket.mainroom).emit('start', room.game);
 		}
-		
 	});
 
 	socket.on("debug" , data => {

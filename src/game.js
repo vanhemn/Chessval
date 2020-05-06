@@ -2,6 +2,7 @@
 'use strict';
 const PF = require('pathfinding');
 
+// add turn player turn with id i think
 module.exports = class Game {
 	matrix = [];
 	rules = require("../config/game.json")
