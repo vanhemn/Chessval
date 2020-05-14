@@ -69,8 +69,24 @@ module.exports = class Game {
 	}
 
 	checkRange (to, from, range) {
-		//make serv range verification
-		return true
+		let starty = Math.max(0,(from.y - range));
+		let endy = Math.min(this.rules.size - 1, (from.y + range));
+
+		for(let row = starty ; row <= endy ; row++){
+
+			let xrange = range - Math.abs(row - from.y);
+			let startx = Math.max(0,      (from.x - xrange));
+			let endx = Math.min(this.rules.size - 1, (from.x + xrange));
+
+			for(let col = startx ; col <= endx ; col++){
+				if (col == to.x && row == to.y) {
+					console.log("attack ok");
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	attack (playerId, from, obj) {

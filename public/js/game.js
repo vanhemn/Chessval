@@ -4,17 +4,17 @@ const game = {
 	findRange: (tile, range) => {
 		var tiles = [];
 
-		starty = Math.max(0,(tile.y - range));
-		endy = Math.min(gameData.rules.size - 1, (tile.y + range));
+		let starty = Math.max(0,(tile.y - range));
+		let endy = Math.min(gameData.rules.size - 1, (tile.y + range));
 
-		for(row = starty ; row <= endy ; row++){
+		for(let row = starty ; row <= endy ; row++){
 
-			xrange = range - Math.abs(row - tile.y);
+			let xrange = range - Math.abs(row - tile.y);
 
-			startx = Math.max(0,      (tile.x - xrange));
-			endx = Math.min(gameData.rules.size - 1, (tile.x + xrange));
+			let startx = Math.max(0,      (tile.x - xrange));
+			let endx = Math.min(gameData.rules.size - 1, (tile.x + xrange));
 
-			for(col = startx ; col <= endx ; col++){
+			for(let col = startx ; col <= endx ; col++){
 				tiles.push([col,row]);
 			}
 		}
