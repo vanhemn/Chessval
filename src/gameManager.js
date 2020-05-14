@@ -38,4 +38,12 @@ module.exports = function(socket, io) {
 		}	
 	})
 
+	socket.on('attack', (data) => {
+		console.log(data)
+		let rep = io.sockets.adapter.rooms[socket.mainroom].game.attack(socket.id, data.from, data.target)
+		if (rep) {
+			io.to(socket.mainroom).emit('attack', {obj: rep, game: io.sockets.adapter.rooms[socket.mainroom].game});
+		}	
+	})
+
 }

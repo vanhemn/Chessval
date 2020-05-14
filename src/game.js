@@ -6,6 +6,7 @@ module.exports = class Game {
 	matrix = [];
 	rules = require("../config/game.json")
 	players = {};
+	player_turn = null;
 	constructor() {
 		for(var i=0; i<this.rules.size; i++) {
 			this.matrix[i] = [];
@@ -20,9 +21,9 @@ module.exports = class Game {
 		if (Object.keys(this.players).length <= 2) {
 			let p;
 			if (Object.keys(this.players).length == 0)
-				p = new Player(name,"b");
+				p = new Player(name,"b",this.rules.gold);
 			if (Object.keys(this.players).length == 1)
-				p = new Player(name,"n");
+				p = new Player(name,"n",this.rules.gold);
 			this.players[id] = p;
 		}
 	}
@@ -32,7 +33,7 @@ module.exports = class Game {
 		delete this.players[id];
 	}
 
-	/*create and place piece*/
+	/*create and place piece add price check*/
 	createPiece(playerId, piece_name, position) {
 		if (this.matrix[position.y][position.x] == null && this.players[playerId]) {
 			let piece = Object.assign({}, this.rules.units[piece_name]);
@@ -61,20 +62,40 @@ module.exports = class Game {
 		let finder = new PF.AStarFinder();
 		let grid = new PF.Grid(Object.assign(this.matrix));
 		let path = finder.findPath(from.x, from.y, to.x, to.y, grid);
-		console.log(path)
 		if (path.length != 0 && path.length <= move + 1){
 			return true;
 		}
-		console.log("cant move")
 		return false;
+	}
+
+	checkRange (to, from, range) {
+		//make serv range verification
+		return true
+	}
+
+	attack (playerId, from, obj) {
+		console.log("on attack")
+		let piece = this.matrix[from.y][from.x];
+		let target = this.matrix[obj.y][obj.x];
+		if (piece && piece.playerId == playerId 
+			&& target && target.playerId != playerId 
+			&& this.checkRange(piece.position, target.position, piece.range)) {
+			console.log("in if")
+			target.life -= piece.damage;
+			if (target.life <= 0) this.matrix[target.position.y][target.position.x] = null;
+			return target;
+		}
+		return null;
 	}
 }
 
 class Player {
 	name;
 	color;
-	constructor(name, color) {
+	gold;
+	constructor(name, color, gold) {
 		this.name = name;
 		this.color = color;
+		this.gold = gold
 	}
 }

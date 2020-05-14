@@ -9,6 +9,11 @@
 	border: 2px solid #29ABE2;
 }
 
+.rangepreview {
+	background-color: rgba(255, 151, 38, 0.5);
+	border: 2px solid #29ABE2;
+}
+
 .select {
 	background-color: rgba(255, 255, 255, 0.08);
 	border: 2px solid #fff;

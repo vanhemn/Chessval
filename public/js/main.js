@@ -1,5 +1,5 @@
 const params ={};location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(s,k,v){params[k]=v})
-const socket = io.connect('loaclhost:8080');
+const socket = io.connect('localhost:8080');
 let gameData;
 let color;
 
@@ -31,12 +31,18 @@ socket.on('chat', (data) => {
 })
 
 socket.on('appendPiece', (data) => {
-	game.place(null, data.obj, data.game)
+	game.place(null, data.obj, data.game);
 })
 
 socket.on('move', (data) => {
-	game.place(data.from, data.obj, data.game)
+	game.place(data.from, data.obj, data.game);
 })
+
+socket.on('attack', (data) => {
+	console.log(data)
+	game.takeDmg(data.obj, data.game);
+})
+
 
 /*crée selon la taille coter serveur*/
 function resize_table_chess( id )
