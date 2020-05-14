@@ -6,7 +6,9 @@ module.exports = class Game {
 	matrix = [];
 	rules = require("../config/game.json")
 	players = {};
-	player_turn = null;
+	phase = "BUY" /*BUY/PLAY/WIN*/
+	player_turn = null; /*Player can play here*/
+
 	constructor() {
 		for(var i=0; i<this.rules.size; i++) {
 			this.matrix[i] = [];
@@ -33,9 +35,25 @@ module.exports = class Game {
 		delete this.players[id];
 	}
 
-	/*create and place piece add price check*/
+	/* start game with turn*/
+	readyToPlay(playerId) {
+		let count = 0;
+		if (this.players[playerId])
+			this.players[playerId].rdy = true;
+		for (let o of this.players) {
+			if (o.rdy = true) count++;
+		}
+		if (count == this.players.length)
+			this.phase = "PLAY";
+	}	
+
+	/*create and place piece add price check ONLY on BUY phase*/
 	createPiece(playerId, piece_name, position) {
-		if (this.matrix[position.y][position.x] == null && this.players[playerId]) {
+		if (this.matrix[position.y][position.x] == null
+			&& this.phase = "BUY"
+			&& this.players[playerId] 
+			&& this.rules.units[piece_name] && this.players[playerId].gold - this.rules.units[piece_name].price >= 0) {
+			this.players[playerId].gold -= this.rules.units[piece_name].price
 			let piece = Object.assign({}, this.rules.units[piece_name]);
 			piece.playerId = playerId;
 			piece.position = position;
@@ -46,6 +64,7 @@ module.exports = class Game {
 	}
 
 	/*move existing piece*/
+	/* on BUY free move on 3 first row | on PLAY One move per turn*/
 	movePiece(playerId, to, object) {
 		let piece = this.matrix[object.position.y][object.position.x]
 		if (piece && piece.playerId == playerId && this.checkMove(to, piece.position, piece.move)) {
@@ -89,6 +108,7 @@ module.exports = class Game {
 		return false;
 	}
 
+	/* ONLY on PLAY attack end turn (1move and one atatck with same piece)*/
 	attack (playerId, from, obj) {
 		console.log("on attack")
 		let piece = this.matrix[from.y][from.x];
@@ -109,6 +129,7 @@ class Player {
 	name;
 	color;
 	gold;
+	rdy = false;
 	constructor(name, color, gold) {
 		this.name = name;
 		this.color = color;

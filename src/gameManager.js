@@ -24,7 +24,7 @@ module.exports = function(socket, io) {
 	});
 
 	socket.on("debug" , data => {
-		let piece =  io.sockets.adapter.rooms[socket.mainroom].game.createPiece(socket.id, "Chevalier", data)
+		let piece =  io.sockets.adapter.rooms[socket.mainroom].game.createPiece(socket.id, data.name, data.pos)
 		if (piece){
 			io.to(socket.mainroom).emit('appendPiece', {obj: piece, game: io.sockets.adapter.rooms[socket.mainroom].game});
 		}	
