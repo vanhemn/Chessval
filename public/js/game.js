@@ -70,6 +70,40 @@ const game = {
 		if (obj.life != obj.maxLife) {
 			$("#g_"+obj.position.x+"_"+obj.position.y+" div span").removeClass("lifefull").addClass("lifelow");
 		}
+	},
+
+	drawShop(data) {
+		console.log(data.rules.units)
+		let units = data.rules.units
+		for (let u of Object.keys(units)) {
+			let panel = $(`<div class="card-panel shopback col s4">
+								<center>
+									<img width="50%" src="/img/units/`+units[u].img+`_`+data.players[socket.id].color+`.png">
+									<h6>`+units[u].price+` <img width="20px" class="coin" src="/img/pictos/coin.png"></h6>
+								</center>
+							</div>`);
+			panel.click(e => drawPlace(e,units[u]))
+			$('#shopContainer').append(panel)
+		}
+		$("#shop").show();
+	}
+}
+
+function drawPlace(e,piece) {
+	clean()
+	console.log(gameData.players[socket.id].color)
+	$(e.currentTarget).addClass("selected")
+	let ystart = gameData.players[socket.id].color == "n"?7:0;
+	let ymax = gameData.players[socket.id].color == "n"?10:3;
+	for (let x = 0; x < 10; x++) {
+		for (let y = ystart; y < ymax; y++) {
+			if (gameData.matrix[y][x] == null) {
+				$("#g_"+x+"_"+y+" div").addClass("placePreview")
+				$("#g_"+x+"_"+y+" div").click(_ => {
+					socket.emit("debug", {pos: {x:x,y:y}, name: piece.name})
+				})
+			}
+		}
 	}
 }
 
@@ -113,6 +147,9 @@ function fillInfo(obj){
 
 
 function clean() {
+	$(".selected").removeClass("selected");
+	$(".placePreview").off("click");
+	$(".placePreview").removeClass("placePreview");
 	$(".movepreview").off("click");
 	$(".rangepreview").off("click");
 	$("td div").removeClass("movepreview");

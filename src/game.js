@@ -49,10 +49,7 @@ module.exports = class Game {
 
 	/*create and place piece add price check ONLY on BUY phase*/
 	createPiece(playerId, piece_name, position) {
-		if (this.matrix[position.y][position.x] == null
-			&& this.phase = "BUY"
-			&& this.players[playerId] 
-			&& this.rules.units[piece_name] && this.players[playerId].gold - this.rules.units[piece_name].price >= 0) {
+		if (this.matrix[position.y][position.x] == null && this.phase == "BUY" && this.players[playerId] && this.rules.units[piece_name] && this.players[playerId].gold - this.rules.units[piece_name].price >= 0) {
 			this.players[playerId].gold -= this.rules.units[piece_name].price
 			let piece = Object.assign({}, this.rules.units[piece_name]);
 			piece.playerId = playerId;

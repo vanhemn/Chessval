@@ -1,7 +1,6 @@
 const params ={};location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(s,k,v){params[k]=v})
 const socket = io.connect('localhost:8080');
 let gameData;
-let color;
 
 
 $('#text').keypress(function (e) {
@@ -22,7 +21,8 @@ socket.on('connect', () => {
 });
 
 socket.on('start', (data) => {
-	gameData = data
+	gameData = data;
+	game.drawShop(data);
 })
 
 socket.on('chat', (data) => {

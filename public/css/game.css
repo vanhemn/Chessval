@@ -4,6 +4,23 @@
 	overflow-y: auto;
 }
 
+.shopback {
+	background-color: #87C44F;
+}
+
+.coin {
+	position: absolute;
+    margin-left: 2px;
+}
+
+.placePreview {
+	background-color: rgba(255, 255, 255, 0.08);
+	border: 2px solid #fff;
+}
+
+.selected {
+	background-color: #7bb247
+}
 .movepreview {
 	background-color: rgba(41, 171, 226, 0.3);
 	border: 2px solid #29ABE2;
