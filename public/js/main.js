@@ -1,5 +1,5 @@
 const params ={};location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(s,k,v){params[k]=v})
-const socket = io.connect('localhost:8080');
+const socket = io.connect();
 let gameData;
 
 
